@@ -1,179 +1,55 @@
-# Cloud-Style ML-Based API Threat Detection System
+# API Threat Detection System
 
-## Project Overview
+This project is an AI-based API Threat Detection System that analyzes API traffic using behavioral analysis per IP address. The system detects malicious activities in real time and provides suggestions and future predictions for security actions.
 
-This project implements a cloud-inspired API threat detection pipeline using Machine Learning.  
-The system simulates real-world API traffic, detects anomalous behavior using Isolation Forest, and provides enterprise-style monitoring and export capabilities.
+## Key Features
 
-The design mirrors modern cloud security architectures such as:
-- Log ingestion systems (e.g., BigQuery / Cloud Logging)
-- ML-based anomaly detection (e.g., Vertex AI)
-- Security enforcement layers (e.g., Cloud Armor)
-- Monitoring and reporting integrations (e.g., SIEM)
+- Behavioral Analysis per IP
+- Real-time API traffic simulation
+- Machine Learning-based threat detection
+- Attack classification (DDoS, Brute Force, Credential Stuffing, Bot Activity, API Abuse)
+- AI-based recommendations (what action to take)
+- Future prediction (what may happen next)
+- SOC-style dashboard for monitoring
 
----
+## Technologies Used
 
-## System Architecture
+- Python
+- Flask
+- Machine Learning (Logistic Regression)
+- HTML Dashboard
 
-The system follows a structured pipeline:
+## How the System Works
 
-1. Traffic Simulation Layer  
-   Generates normal and attack traffic across multiple IPs.
+1. API traffic is simulated.
+2. Each IP is monitored for:
+   - Request frequency
+   - Endpoint diversity
+   - User-agent behavior
+   - Time patterns
+3. The model detects abnormal behavior.
+4. Attacks are classified.
+5. The system provides:
+   - Detection
+   - Suggestions
+   - Predictions
 
-2. Log Storage Layer  
-   Stores API logs in a structured SQLite database.
+## How to Run the Project
 
-3. Feature Engineering Pipeline  
-   Extracts behavioral features:
-   - Request count
-   - Average time between requests
-   - Burst score
+### Step 1: Start API Server
+python3 api_server.py
 
-4. Machine Learning Layer  
-   - Isolation Forest (unsupervised anomaly detection)
-   - Model saved as `model.pkl`
-   - Loaded during inference
+This will start the backend system and open the main dashboard.
 
-5. Detection Engine  
-   - Classifies anomalies
-   - Assigns risk level (Low / Medium / High)
-   - Calculates detection confidence
-   - Measures response time
+### Step 2: Start AI Dashboard
+python3 ai_dashboard_generator.py
 
-6. Security Layer  
-   - API Key authentication
-   - Rate limiting enforcement
-   - Structured JSON responses
+This will open the AI Threat Intelligence Panel showing:
 
-7. Monitoring & Reporting Layer  
-   - Detection run history logging
-   - Export detection results as JSON
-   - Designed for SIEM integration
-
----
-
-## Machine Learning Model Used
-
-Isolation Forest (Unsupervised Anomaly Detection)
-
-Reason:
-- Suitable for detecting unknown attack patterns
-- Works without labeled datasets
-- Effective for burst traffic anomaly detection
-
-Features used:
-- request_count
-- avg_time_between_requests
-- burst_score
-
----
-
-## API Endpoints
-
-### 1. Simulate Traffic
-POST /api/v1/simulate
-
-Generates:
-- Multi-IP normal traffic
-- Burst attack traffic
-- High-volume log generation
-
-Header required:
-x-api-key: SECURE123
-
----
-
-### 2. Run Detection
-GET /api/v1/detect
-
-Performs:
-- Feature extraction
-- ML inference
-- Risk classification
-- Confidence scoring
-- Response time measurement
-
-Returns:
-- total logs analyzed
-- total IPs analyzed
-- anomalies detected
-- risk levels
-- anomaly details
-
----
-
-### 3. View Detection History
-GET /api/v1/history
-
-Shows previous detection runs for auditing and monitoring.
-
----
-
-### 4. Export Results
-GET /api/v1/export
-
-Exports last detection results as structured JSON.
-Designed for SIEM integration and reporting systems.
-
----
-
-## Security Features
-
-- API Key Authentication
-- Rate limiting
-- Structured anomaly scoring
-- Risk classification
-- Audit logging of detection runs
-
----
-
-## How To Run The Project
-
-1. Activate virtual environment:
-   source venv/bin/activate
-
-2. Run API server:
-   python3 api_server.py
-
-3. Simulate traffic:
-   POST /api/v1/simulate
-
-4. Train model:
-   Stop API → python3 train_model.py
-
-5. Restart API
-
-6. Run detection:
-   GET /api/v1/detect
-
----
-
-## Cloud Alignment (Conceptual Mapping)
-
-| Cloud Component | Project Equivalent |
-|-----------------|--------------------|
-| BigQuery        | SQLite log storage |
-| Vertex AI       | Isolation Forest ML model |
-| Cloud Armor     | API key + rate limiting |
-| Log Sink        | Detection history storage |
-| Looker Studio   | Export JSON for visualization |
-| SIEM            | Exported detection report |
-
----
-
-## Academic Contribution
-
-This project demonstrates:
-
-- Cloud-inspired architecture without paid cloud subscription
-- Unsupervised ML-based anomaly detection
-- Multi-layer API protection
-- Enterprise-style monitoring and reporting
-- Secure API design principles
-
----
+- Attack Detection
+- Suggested Actions
+- Future Predictions
 
 ## Author
 
-Master’s Final Project  
-Cloud-Era API Security using Machine Learning
+Anand P Geddam
