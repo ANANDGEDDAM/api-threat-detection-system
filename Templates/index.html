@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud-Native API Threat Detection System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 450px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .attack {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .reset {
+            background-color: #3498db;
+            color: white;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 5px;
+            background-color: #fdecea;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cloud-Native API Threat Detection System</h1>
+
+    <div class="card">
+        <h3>System Status</h3>
+        <p><strong>{{ status }}</strong></p>
+    </div>
+
+    <div class="card">
+        <h3>Traffic Metrics</h3>
+        <p><strong>Total Requests:</strong> {{ total_requests }}</p>
+        <p><strong>Total Unique IPs:</strong> {{ total_ips }}</p>
+        <p><strong>Total Blocked IPs:</strong> {{ total_blocked }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Blocked IP Addresses</h3>
+        {% if blocked_ips %}
+            <ul>
+                {% for ip in blocked_ips %}
+                    <li>{{ ip }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No blocked IPs detected.</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <form action="/simulate_attack">
+            <button class="attack">Simulate Attack</button>
+        </form>
+
+        <form action="/reset_system">
+            <button class="reset">Reset System</button>
+        </form>
+    </div>
+
+</body>
+</html>

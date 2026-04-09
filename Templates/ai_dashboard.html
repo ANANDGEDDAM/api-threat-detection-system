@@ -1,0 +1,94 @@
+import requests
+import time
+import os
+
+FILE = "ai_dashboard_live.html"
+
+print("🚀 AI Dashboard Generator Started...")
+
+def generate_html(attacks):
+    rows = ""
+
+    if not attacks:
+        rows = "<tr><td colspan='3'>Connecting...</td></tr>"
+    else:
+        for a in attacks:
+            rows += f"""
+            <tr>
+                <td>{a['attack']}</td>
+                <td>{a['action']}</td>
+                <td>{a['future']}</td>
+            </tr>
+            """
+
+    return f"""
+    <html>
+    <head>
+        <title>AI Threat Panel</title>
+        <meta http-equiv="refresh" content="3">
+    </head>
+    <body style="background:black; color:lime; text-align:center;">
+        <h1>🧠 AI Threat Intelligence Panel</h1>
+
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>Attack Type</th>
+                <th>Action</th>
+                <th>Risk</th>
+            </tr>
+            {rows}
+        </table>
+    </body>
+    </html>
+    """
+
+def analyze():
+    try:
+        res = requests.get("http://127.0.0.1:5000/logs")
+        data = res.json()
+
+        if not data:
+            return []
+
+        latest_logs = data[-5:]
+
+        results = []
+
+        for log in latest_logs:
+            score = log.get("score", 0)
+            attack_type = log.get("attack_type", "Unknown")
+
+            if score > 0.85:
+                action = "BLOCK IP"
+                future = "HIGH"
+            elif score > 0.7:
+                action = "RATE LIMIT"
+                future = "MEDIUM"
+            else:
+                action = "MONITOR"
+                future = "LOW"
+
+            results.append({
+                "attack": attack_type,
+                "action": action,
+                "future": future
+            })
+
+        return results
+
+    except Exception as e:
+        print("ERROR:", e)
+        return []
+
+
+# 🔥 FORCE CREATE FILE + OPEN
+while True:
+    attacks = analyze()
+    html = generate_html(attacks)
+
+    with open(FILE, "w") as f:
+        f.write(html)
+
+    os.system(f"open {FILE}")
+
+    time.sleep(3)
