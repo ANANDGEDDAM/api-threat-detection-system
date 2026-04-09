@@ -28,6 +28,10 @@ The system not only detects threats but also provides recommended actions and fu
 
 ## How It Works
 
+## System Flow
+
+API Request → Feature Extraction → Behavioral Analysis per IP → ML Model → Attack Detection → Suggestion → Prediction → Dashboard
+
 1. API traffic is simulated.
 2. Each IP is monitored based on:
    - Request frequency
