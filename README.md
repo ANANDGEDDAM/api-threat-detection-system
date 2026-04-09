@@ -94,6 +94,14 @@ The system provides:
 
 ---
 
+## Why This Project is Special
+
+- Detects attacks using behavioral analysis per IP
+- Not just rule-based detection
+- Provides suggestions (what to do)
+- Provides predictions (what may happen next)
+- Works like a mini SOC system
+
 ## Author
 
 Anand P Geddam
