@@ -1,4 +1,4 @@
-# API Threat Detection System
+## AI-Based Behavioral API Threat Detection System
 
 This project is an AI-based API Threat Detection System that uses behavioral analysis per IP address to detect malicious activity in real time.
 
