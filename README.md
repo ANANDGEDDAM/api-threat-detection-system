@@ -1,5 +1,8 @@
 ## AI-Based Behavioral API Threat Detection System
 
+# API Threat Detection System
+...
+
 This project is an AI-based API Threat Detection System that uses behavioral analysis per IP address to detect malicious activity in real time.
 
 The system not only detects threats but also provides recommended actions and future predictions, similar to a Security Operations Center (SOC).
